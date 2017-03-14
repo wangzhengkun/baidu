@@ -1,5 +1,1 @@
-deploy:
-  type: git
-  repo: git@github.com:wangzhengkun/wangzhengkun.github.io.git
-  branch: master
 theme: jekyll-theme-cayman
