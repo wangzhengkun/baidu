@@ -87,7 +87,7 @@ function render(data) {
 
         var li = document.createElement('li');
         var b  = document.createElement('b');
-        li.innerText = data[i][0]+'：';
+        li.innerText = '第'+i+1+ '名：' data[i][0]+'：';
         b.innerText = data[i][1];
         li.appendChild(b);
         document.getElementById('resort').appendChild(li);
