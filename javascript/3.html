@@ -83,15 +83,12 @@ function sortAqiData(data) {
  * 格式见ul中的注释的部分
  */
 function render(data) {
+    var arr = ["一","二","三","四","五","六","七"];
+    var innerText = '';
     for(var i =0;i<data.length;i++){
-
-        var li = document.createElement('li');
-        var b  = document.createElement('b');
-        li.innerText = '第'+i+1+ '名：' data[i][0]+'：';
-        b.innerText = data[i][1];
-        li.appendChild(b);
-        document.getElementById('resort').appendChild(li);
+        innerText += '<li>第'+arr[i]+ '名：'+ data[i][0]+'：<b>'+data[i][1]+'</b></li>';
     }
+        document.getElementById('resort').innerHTML=innerText;    
 }
 
 function btnHandle() {
