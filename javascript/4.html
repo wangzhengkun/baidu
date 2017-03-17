@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>IFE JavaScript Task 01</title>
+  </head>
+<body>
+    <div>
+        <input type='number' id='input_data'  />
+        <button id="left_in" onclick="leftIn()">左侧入</button>
+        <button id="right_in" onclick="rightIn()">右侧入</button>
+        <button id="left_out" onclick="leftOut()">左侧出</button>
+        <button id="right_out" onclick="rightOut()">右侧出</button>
+    </div>
+    <div id="arr">
+        
+    </div>
+<style type="text/css">
+      .square {
+        float:left;
+        width:20px;
+        height:20px;
+        background-color:red;
+        margin-left:20px;
+      }
+</style> 
+<script type="text/javascript">
+    var data =[1,2,3,4,5]
+
+    function init(data){
+       var innerText = '';
+        data.forEach(function(value,index,arr){
+          innerText +='<div class="square" onclick="remove('+index+')">'+value+'</div>'
+        })
+        document.getElementById('arr').innerHTML = innerText
+    } 
+    init(data);
+
+    /*
+    右侧入
+    */  
+    function rightIn(){
+      var value= document.getElementById('input_data').value      
+        data.push(value)
+        init(data)
+    }
+    /**
+    右侧出
+    **/
+    function rightOut(){
+     var value= data.pop()
+      alert(value)
+      init(data)
+    }
+    /**
+    左侧入
+    **/
+    function leftIn(){
+      var value= document.getElementById('input_data').value
+      data.unshift(value)
+       init(data)
+    }
+    /**
+    左侧出
+    **/
+    function leftOut(){
+     var value= data.shift()
+       alert(value)
+       init(data)
+    }
+    /**
+    点击方块消失
+    **/
+    function remove(index){
+      data.splice(index,1)
+       init(data)
+    }
+</script>
+</body>
+</html>    
