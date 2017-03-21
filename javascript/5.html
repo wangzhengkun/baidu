@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>IFE JavaScript Task 01</title>
+  </head>
+<body>
+    <div>
+        <input type='number' id='input_data'  />
+        <button id="left_in" onclick="leftIn()">左侧入</button>
+        <button id="right_in" onclick="rightIn()">右侧入</button>
+        <button id="left_out" onclick="leftOut()">左侧出</button>
+        <button id="right_out" onclick="rightOut()">右侧出</button>
+        <button id="maopao" onclick="sort()">冒泡排序</button>
+    </div>
+    <div id="arr">
+        
+    </div>
+<style type="text/css">
+      .square {
+        float:left;
+        width:20px;
+        background-color:red;
+        margin-left:20px;
+      }
+</style> 
+<script type="text/javascript">
+    var data =[11,55,20,33,70,15]
+    //用来存储每一次排序之后的排列情况
+    var state = []
+    var count1 = 0;
+    var count2 = 0;    
+
+    function init(data){
+       var innerText = '';
+        data.forEach(function(value,index,arr){
+          innerText +='<div class="square" type="number" style="height:'+value*5+'px" onclick="remove('+index+')"></div>'
+        })
+        document.getElementById('arr').innerHTML = innerText
+    } 
+    init(data);
+
+
+    function sort(){
+        maopao();
+        //定义一个全局变量timer定时器
+        timer = setInterval(render,500);
+    }
+
+
+    /**
+    冒泡排序
+    **/
+    function maopao(){
+        for (var i = 0; i < data.length - 1; i++) {//比较的次数是length-1
+            for (var j = 0; j < data.length - 1 - i; j++) {
+                if (data[j] > data[j + 1]) {
+                    var tmp = data[j];
+                    data[j] = data[j + 1];
+                    data[j + 1] = tmp;
+                    count1++;
+                    state.push(data.slice(0));
+                }
+            }
+        }
+    }
+    //将每一趟中的每一次比较都渲染到页面中
+    function render(){
+        var lis = document.querySelectorAll('.square');
+        data = state.shift() || [];
+        for(var i = 0; i < lis.length; i++){
+            lis[i].style.height = data[i]*5+'px';
+        }
+        count2++;
+        if(count2 == count1){
+            clearInterval(timer);
+        }
+    }
+
+    /*
+    右侧入
+    */  
+    function rightIn(){
+      var value= document.getElementById('input_data').value      
+        if(checkValidate(value)){
+            data.push(value)
+            checkDataLength(data)        
+        }else {
+            alert('只能输入10到100之间的数')
+        }
+    }
+    /**
+    右侧出
+    **/
+    function rightOut(){
+     var value= data.pop()
+      alert(value)
+      init(data)
+    }
+    /**
+    左侧入
+    **/
+    function leftIn(){
+        var value= document.getElementById('input_data').value
+        if(checkValidate(value)){
+            data.unshift(value)
+            checkDataLength(data)        
+        }else {
+            alert('只能输入10到100之间的数')
+        }
+    }
+    /**
+    左侧出
+    **/
+    function leftOut(){
+     var value= data.shift()
+       alert(value)
+       init(data)
+    }
+    /**
+    点击方块消失
+    **/
+    function remove(index){
+      data.splice(index,1)
+       init(data)
+    }
+    /**
+    检查元素数量是否超过60
+    **/
+    function checkDataLength(data){
+        if(data.length>60){
+            alert('元素数量过多！')
+        }else {
+            init(data)
+        }
+    }
+    /**
+    检查输入的合法性
+    **/
+    function checkValidate(value){
+         if(value>=10&&value<=100){
+           return true
+        }else {
+           return false
+        } 
+    }
+
+</script>
+</body>
+</html>    
