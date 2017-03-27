@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>IFE JavaScript Task 06</title>
+  </head>
+<body>
+<div>
+    <textarea type='text' id='input_data' rows="5" cols="40"></textarea>
+    <button id="inp" onclick="input()">输入</button>
+</div>
+<div id="search">
+    <input type="text" id="searchData"/>
+    <button id="srh" onclick="search()">查询</button>
+</div>    
+<div id="arr">
+    
+</div>
+<style type="text/css">
+    .square {
+        float:left;
+        width:50px;
+        background-color:ccffcc;
+        margin-left:20px;
+    }
+</style> 
+<script type="text/javascript">
+    var books = []
+    //存储一个备份 用来清除上一次查询改变的颜色状态  
+    var books2 = []
+    /**
+    输入函数
+    **/
+    function input(){
+        var value= document.getElementById('input_data').value
+        var data =value.split(/[\n\r\t\s,，、;；]+/g)
+        //把输入的值放入book数组中 用来查询
+        books=books.concat(data)
+        for(var i=0;i<data.length;i++){
+            var newNode = document.createElement("div")
+            newNode.className = 'square'
+            newNode.innerHTML =data[i]
+            document.getElementById('arr').appendChild(newNode);
+        }
+    }
+
+    /**
+    查询函数
+    **/
+    function search(){
+
+         var value= document.getElementById('searchData').value
+         var lis = document.querySelectorAll('.square')        
+
+         for(var i=0;i<books.length;i++){
+            if(books[i].indexOf(value)>=0){
+                var reg = new RegExp("("+value+")","g")
+                lis[i].innerHTML = lis[i].innerText.replace(reg,"<font color=red>$1</font>")
+            }
+         }  
+    }
+</script>
+</body>
+</html>    
