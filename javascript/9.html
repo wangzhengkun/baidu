@@ -41,7 +41,7 @@
 				</div>
 			</div>
 		</div>
-        <div class="item1">
+        <div class="item1" onclick="choose(this)">
 			M
 			<div class="item2">
 				N
@@ -62,18 +62,21 @@
 		div {
 			border: 1px solid #000;
 			display: flex;
-			justify-content: flex-start;
+			justify-content: center;
 			margin: 10px 10px;
 			background-color: #ffffff;
 		}
 		
 		.box {
-			width: 880px;
+			width:1000px;
 			height: 200px;
 		}
-		
+		.item {
+			width: 30%;
+			height: 70%;
+		}
 		.item1 {
-			width: 250px;
+			width: 300px;
 			height: 160px;
 		}
 		
@@ -99,7 +102,45 @@
         //计数器 用来清除setInterval
         var i=0; 
         //查找的value
-        var searchVal;   
+        var searchVal; 
+        //被选中的node
+        var chooseNode;
+        /**
+        给所有的div添加click事件
+        **/
+       function init(){
+            var els = document.getElementsByTagName('div')
+            for(var i=0;i<els.length;i++){
+                els[i].onclick = function(){
+                    chooseNode = event.target;
+                    chooseNode.style.backgroundColor='yellow'
+                }
+            }
+        }
+        init();
+        /**
+        删除节点
+        **/
+        function deleteItem(){
+            if(chooseNode){
+                 chooseNode.parentNode.removeChild(chooseNode)
+            }
+        }
+        /**
+        添加节点
+        **/
+        function addItem(){
+            var addValue = document.getElementById('addValue').value
+            if(addValue&&chooseNode){
+                var newNode= document.createElement('div')
+                newNode.innerText = addValue
+                newNode.setAttribute('class','item')
+     //           newNode.firstChild.data = addValue;
+                chooseNode.appendChild(newNode)
+              //  chooseNode.children[chooseNode.children.length+1] = chooseNode.children[0]
+            }
+        }
+
         /**
         前序遍历按钮
         **/
