@@ -2,4 +2,4 @@
 ====
 一.斌斌学院（javascript）
 ----
-[###Code](https://github.com/wangzhengkun/baidu/tree/master/javascript)
+[1.Code](https://github.com/wangzhengkun/baidu/tree/master/javascript)
