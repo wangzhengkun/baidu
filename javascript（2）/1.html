@@ -1,0 +1,59 @@
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>IFE JavaScript(2) Task 01</title>
+    </head>
+    <body>
+        <main>
+            <div>
+                名称 <input type="text" id="inp"/> <button onclick="validate()"> 验证</button>
+            </div>
+            <div >
+                <p class="tip" id="prompt">必填，长度为4-16个字符</p>
+            </div>    
+        </main>
+        <style type='text/css'>
+            p {
+                font-size:80%;                
+            }
+            .tip {
+                color:#ccc;
+                margin-left:45px;
+            }
+            .warring {
+                color:red;
+            }
+            .pass {
+                color:green;
+            }
+
+        </style>
+        <script  type="text/javascript">
+            function validate(){
+                var node = document.getElementById('inp')
+                var node2 = document.getElementById('prompt')
+                var value = node.value;
+                if(value==''){
+                    node.style.borderColor = 'red'
+                    node2.innerHTML = '<p class="warring" id="prompt">姓名不能为空</p>'
+                }else if(getLength(value)>3&&getLength(value)<17) {
+                    node.style.borderColor = 'green'
+                    node2.innerHTML = '<p class="pass" id="prompt">通过验证</p>'
+                }else {
+                    node.style.borderColor = 'red'
+                    node2.innerHTML = '<p class="warring" id="prompt">长度为4-16个字符</p>'
+                }
+            }
+            
+            function getLength(value){
+                //把双字节的替换成两个单字节的然后再获得长度
+                if (value == null) return 0;  
+                if (typeof str != "string"){  
+                    value += "";  
+                }  
+                return value.replace(/[^\x00-\xff]/g,"01").length;
+            }
+        </script>
+        
+    </body>
+</html>    
