@@ -1,0 +1,208 @@
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>IFE JavaScript(2) Task 02</title>
+    </head>
+    <body>
+        <main>
+            <form>
+                <div>
+                   名称 <input id="name" onfocus="promptName()" onblur="checkName()"/> 
+                   <p id="nameTip" class=""></p>
+                </div>
+                <div>
+                   密码 <input id="password" onfocus="promptPassword()" onblur="checkPassword()"/> 
+                   <p id="passwordTip" class=""></p>
+                </div>
+                <div>
+                   密码确认 <input id="rePassword" onfocus="promptRePassword()" onblur="checkRePassword()"/> 
+                   <p id="repasswordTip" class=""></p>
+                </div>
+                <div>
+                   邮箱 <input id="email" onfocus="promptEmail()" onblur="checkEmail()"/>  
+                   <p id='emailTip' class=""></p>
+                </div>    
+                <div>
+                   手机 <input id="phoneNumber" onfocus="promptPhone()" onblur="checkPhone()"/>
+                   <p id="phoneTip" class=""></p>
+                </div>
+            </form>
+            <button  onclick="submit()">提交</button>
+        </main>
+        <style type='text/css'>
+            p {
+                margin-left:20px;                
+                font-size:80%;                
+            }
+            .tip {
+                color:#ccc;
+            }            
+            .warring {
+                color:red;
+            }
+            .pass {
+                color:green;
+            }
+
+        </style>
+        <script  type="text/javascript">
+            /**
+            名字提示
+            **/
+            function promptName(){
+                event.target.style.borderColor = 'blue'
+                document.getElementById('nameTip').innerHTML = '<p class="tip" id="nameTip" >必填，长度 4-16个字符</p>'
+            }
+            /**
+            验证名字
+            **/
+            function checkName(){
+                var node =  document.getElementById('name')
+                var node2 = document.getElementById('nameTip')
+                var name = node.value
+                if(name==''){
+                    node.style.borderColor = 'red'
+                    node2.innerHTML = '<p class="warring " id="nameTip">姓名不能为空</p>'
+                    return false
+                }else if(getLength(name)>3&&getLength(name)<17) {
+                    node.style.borderColor = 'green'
+                    node2.innerHTML = '<p class="pass" id="nameTip">通过验证</p>'
+                    return true
+                }else {
+                    node.style.borderColor = 'red'
+                    node2.innerHTML = '<p class="warring" id="nameTip">长度为4-16个字符</p>'
+                    return false
+                }
+            }
+            /**
+            判断输入字符的长度
+            **/
+            function getLength(value){
+                //把双字节的替换成两个单字节的然后再获得长度
+                if (value == null) return 0;  
+                if (typeof str != "string"){  
+                    value += "";  
+                }  
+                return value.replace(/[^\x00-\xff]/g,"01").length;
+            }
+            /**
+            密码提示
+            **/
+            function promptPassword(){
+                event.target.style.borderColor = 'blue'
+                document.getElementById('passwordTip').innerHTML = '<p class="tip" id="passwordTip" >必填，密码</p>'
+            }
+            /**
+            密码检查
+            **/
+            function checkPassword(){
+                var node =  document.getElementById('password')
+                var node2 = document.getElementById('passwordTip')
+                var password = node.value
+                if (password==''){
+                    node.style.borderColor = 'red'
+                    node2.innerHTML = '<p class="warring " id="passwordTip">密码不能为空</p>'
+                    return false
+                }else {
+                    node.style.borderColor = 'green'
+                    node2.innerHTML = '<p class="pass" id="passwordTip">通过验证</p>'
+                    return true
+                }
+            }
+            /**
+            密码提示
+            **/
+            function promptRePassword(){
+                event.target.style.borderColor = 'blue'
+                document.getElementById('repasswordTip').innerHTML = '<p class="tip" id="repasswordTip" >密码必须一致</p>'
+            }
+            /**
+            密码检查
+            **/
+            function checkRePassword(){
+                var node =  document.getElementById('rePassword')
+                var node2 = document.getElementById('repasswordTip')
+                var rePassword = node.value
+                var password = document.getElementById('password').value
+                if (rePassword==''){
+                    node.style.borderColor = 'red'
+                    node2.innerHTML = '<p class="warring " id="repasswordTip">密码不能为空</p>'
+                    return false
+                }else if(rePassword!=password){
+                    node.style.borderColor = 'red'
+                    node2.innerHTML = '<p class="warring " id="repasswordTip">密码不一致</p>'
+                    return false
+                }else {
+                    node.style.borderColor = 'green'
+                    node2.innerHTML = '<p class="pass" id="repasswordTip">通过验证</p>'
+                    return true
+                }
+            }
+            /**
+              邮箱提示
+            **/
+            function promptEmail(){
+                event.target.style.borderColor = 'blue'
+                document.getElementById('emailTip').innerHTML = '<p class="tip" id="emailTip" >必填 邮箱</p>'                
+            }
+            /**
+              邮箱验证
+            **/
+            function checkEmail(){
+                var node =  document.getElementById('email')
+                var node2 = document.getElementById('emailTip')
+                var email = node.value
+                if(/^([a-zA-Z0-9_-])+@([a-zA-Z0-9_-])+(.[a-zA-Z0-9_-])+/.test(email)){
+                    node.style.borderColor = 'green'
+                    node2.innerHTML = '<p class="pass" id="emailTip">通过验证</p>'
+                    return true
+                }else {
+                    node.style.borderColor = 'red'
+                    node2.innerHTML = '<p class="warring " id="emailTip">邮箱格式不正确</p>'
+                    return false
+                }
+            }
+            /**
+              手机号提示
+            **/
+            function promptPhone(){
+                event.target.style.borderColor = 'blue'
+                document.getElementById('phoneTip').innerHTML = '<p class="tip" id="phoneTip" >必填 手机号</p>'                
+            }
+            /**
+              手机号验证
+            **/
+            function checkPhone(){
+                var node =   document.getElementById('phoneNumber')
+                var node2 = document.getElementById('phoneTip')
+                var phone = node.value
+                if (phone==''){
+                    node.style.borderColor = 'red'
+                    node2.innerHTML = '<p class="warring " id="phoneTip">手机号不能为空</p>'
+                    return false
+                }else {
+                    node.style.borderColor = 'green'
+                    node2.innerHTML = '<p class="pass" id="phoneTip">通过验证</p>'
+                    return true
+                }
+            }
+            /**
+            提交
+            **/
+            function submit(){  
+
+                checkName()
+                checkPhone()
+                checkEmail()
+                checkRePassword()
+                checkPassword()
+                if(checkName()&&checkPhone()&&checkEmail()&&checkRePassword()&&checkPassword()){
+
+                }else{
+                    alert('错误')
+                }
+            }
+        </script>
+        
+    </body>
+</html>    
