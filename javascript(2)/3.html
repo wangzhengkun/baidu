@@ -1,0 +1,75 @@
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>IFE JavaScript(2) Task 03</title>
+    </head>
+    <body>
+        <main>
+            <form name="addForm">
+                <div>
+                    <input type="radio" name="identity" onclick="changeId('student')" /> 在校生 <input type="radio" name="identity" onclick="changeId('people')"/>非在校生
+                </div>
+                <div id="student">
+                    学校<select name="city" onchange="change(this.selectedIndex)">
+
+                        </select> 
+                        <select name="shool">
+                            
+                        </select>
+                </div>
+                <div id="people">
+                    就业单位<input/>
+                </div>    
+            </form>
+        </main>
+        <style type='text/css'>
+            #student {
+                display:none
+            }
+            #people {
+                display:none
+            }
+        </style>
+        <script type="text/javascript">
+            var cities = ['北京','上海']
+            var shoolArray = [
+                ['北京电影学院','北京大学'],
+                ['复旦大学']
+            ]
+            /**
+             radio选择函数
+            **/
+             function changeId(id){
+                document.getElementById(id).style.display = 'block'
+                if(id=='student'){
+                    document.getElementById('people').style.display = 'none'
+                }else {
+                    document.getElementById('student').style.display = 'none'
+                }
+             }
+             /**
+             初始化函数
+             **/
+             function init(){
+                 var city = document.addForm.city
+                 city.length = cities.length
+                 for(var i=0;i<cities.length;i++){
+                    city.options[i].text = cities[i]
+                    city.options[i].value = cities[i]                    
+                 }
+             }
+             init()
+             /**
+             城市更改
+            **/
+             function change(num){
+                var shool = document.addForm.shool
+                shool.length=shoolArray[num].length
+                for(var i=0;i<shoolArray[num].length;i++){
+                    shool.options[i].text = shoolArray[num][i]
+                    shool.options[i].value = shoolArray[num][i]
+                }
+             }
+        </script>
+    </body>
+</html>    
