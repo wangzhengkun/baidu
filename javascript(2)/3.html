@@ -7,7 +7,7 @@
         <main>
             <form name="addForm">
                 <div>
-                    <input type="radio" name="identity" onclick="changeId('student')" /> 在校生 <input type="radio" name="identity" onclick="changeId('people')"/>非在校生
+                    <input type="radio" name="identity" checked='true' onclick="changeId('student')" /> 在校生 <input type="radio" name="identity" onclick="changeId('people')"/>非在校生
                 </div>
                 <div id="student">
                     学校<select name="city" onchange="change(this.selectedIndex)">
@@ -24,7 +24,7 @@
         </main>
         <style type='text/css'>
             #student {
-                display:none
+                display:block
             }
             #people {
                 display:none
@@ -59,6 +59,7 @@
                  }
              }
              init()
+             change(0)
              /**
              城市更改
             **/
