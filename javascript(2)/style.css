@@ -1,0 +1,15 @@
+.box {
+    width:400px;
+    height:400px;
+    border: 1px solid black; 
+}
+#square {
+    position:absolute;
+    width:40px;
+    height:40px;
+    background-color: red;
+}
+#direction {
+    position:absolute;
+    background-color:blue;
+}
